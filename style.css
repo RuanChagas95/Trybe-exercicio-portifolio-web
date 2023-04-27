@@ -9,7 +9,6 @@ p {
 #me-photo {
 
     text-align: center;
-    background-color: yellow;
 
 
 }
@@ -28,7 +27,6 @@ p {
 
         max-width: 33.33%;
         max-height: 167px;
-        border-radius: 15%;
     }
 
     .container {
@@ -60,18 +58,6 @@ p {
 @media (max-width: 759px) {
     #me-photo-jpg {
         max-width: 250px;
-
-    }
-
-    #me-photo {
-        border-radius: 40%;
-
-    }
-
-    #mephoto h2 {
-        margin-top: 0px;
-        margin-bottom: 20px;
-        padding-bottom: 20px;
 
     }
 }
