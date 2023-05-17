@@ -4,7 +4,7 @@ html.addEventListener('keydown', main)
 const word = 'KAUA'
 let wordIndex = 0
 writing = document.querySelector('#writing')
-instructionKey = document.querySelector('#instructionKey')
+hintKey = document.querySelector('#hintKey')
 
 function main(event) {
     const key = event.key
@@ -12,20 +12,21 @@ function main(event) {
         mainHtml.style.backgroundColor = mainHtml.style.backgroundColor === 'red' ? 'yellow' : 'red';
         if (wordIndex < word.length - 1){
             wordIndex += 1
-            updateInstructionKey()
+            updateHintKey()
             updateWriting()
-            instructionKey.classList.remove('attention')
+            hintKey.style.fontSize = '200%'
+            hintKey.classList.remove('attention')
         } else{
             winner()
         }
     } else{
-        instructionKey.classList.add('attention')
-
+        upSizeIntruction()
+        hintKey.classList.add('attention')
     }
     
 }
-function updateInstructionKey(){
-    instructionKey.innerText = word[wordIndex]
+function updateHintKey(){
+    hintKey.innerText = word[wordIndex]
 }
 function updateWriting(){
     let writingText = ''
@@ -34,12 +35,22 @@ function updateWriting(){
     }
     writing.innerText = writingText
 }
+function upSizeIntruction(){
+    fontSize = parseInt(hintKey.style.fontSize)
+    if (fontSize < 250 || isNaN(fontSize)){
+        hintKey.style.fontSize = fontSize ? `${fontSize + 10}%` : '210%'
+    }
+
+}
+
 function winner(){
     console.log('winner');
     wordIndex = 0
-    updateInstructionKey()
+    hintKey.classList.remove('attention')
+    hintKey.style.fontSize = '200%'
+    updateHintKey()
     updateWriting()
-    instructionKey.classList.remove('attention')
+
 
 }
-updateInstructionKey()
+updateHintKey()
