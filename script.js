@@ -1,12 +1,39 @@
+const mainHtml = document.querySelector('main')
+const html = document.querySelector('html')
+html.addEventListener('keydown', main)
+const word = 'KAUA'
+let wordIndex = 0
+writing = document.querySelector('#writing')
+instructionKey = document.querySelector('#instructionKey')
 
-function test() {
-    const value = textBox.value;
-    obj = {k:true, a:true, u:true}
-    if (obj[value]) {
-        const body = document.querySelector('body');
-        body.style.backgroundColor = body.style.backgroundColor === 'red' ? 'yellow' : 'red';
-    }
-    textBox.value = ''
+function main(event) {
+    const key = event.key
+    if (key.toUpperCase() === word[wordIndex]) {
+        mainHtml.style.backgroundColor = mainHtml.style.backgroundColor === 'red' ? 'yellow' : 'red';
+        if (wordIndex < word.length - 1){
+            wordIndex += 1
+            updateInstructionKey()
+            updateWriting()
+        } else{
+            winner()
+        }
+        }
+    
 }
-const textBox = document.getElementById('textBox');
-textBox.oninput = test;
+function updateInstructionKey(){
+    instructionKey.innerText = word[wordIndex]
+}
+function updateWriting(){
+    let writingText = ''
+    for (let index = 0; index < wordIndex; index++){
+        writingText += word[index]
+    }
+    writing.innerText = writingText
+}
+function winner(){
+    console.log('winner');
+    wordIndex = 0
+    updateInstructionKey()
+    updateWriting()
+}
+updateInstructionKey()
