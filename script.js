@@ -14,10 +14,14 @@ function main(event) {
             wordIndex += 1
             updateInstructionKey()
             updateWriting()
+            instructionKey.classList.remove('attention')
         } else{
             winner()
         }
-        }
+    } else{
+        instructionKey.classList.add('attention')
+
+    }
     
 }
 function updateInstructionKey(){
@@ -35,5 +39,7 @@ function winner(){
     wordIndex = 0
     updateInstructionKey()
     updateWriting()
+    instructionKey.classList.remove('attention')
+
 }
 updateInstructionKey()
