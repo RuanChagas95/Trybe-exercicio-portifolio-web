@@ -10,6 +10,9 @@ const audios = {}
 
 function main(event) {
   const key = event.key
+  if (writing.classList.contains('winner')){
+    reset()
+  }
   if (key.toUpperCase() === word[wordIndex]) {
     mainHtml.style.backgroundColor = mainHtml.style.backgroundColor === 'red' ? 'yellow' : 'red'
     if (wordIndex < word.length - 1){
@@ -48,7 +51,7 @@ function upSizeIntruction(){
 function loadAudios(){
   audios['hit'] = new Audio('songs/hit.mp3')
   audios['hit'].volume = 0.2
-  audios['winner'] = new Audio('songs/winner.wav')
+  audios['winner'] = new Audio('songs/winner.mp3')
 }
 function playAudio(audio){
   if (audios[audio]){
@@ -58,13 +61,22 @@ function playAudio(audio){
 }
 
 function winner(){
-  console.log('winner')
   playAudio('winner')
+  writing.innerText = word
+  writing.classList.add('winner')
+  
+    
+}
+function reset(){
+  writing.innerText = ''
+  writing.classList.remove('winner')
   wordIndex = 0
   hintKey.classList.remove('attention')
+  hintKey.classList.remove('winner')
   hintKey.style.fontSize = '200%'
   updateHintKey()
   updateWriting()
 }
 loadAudios()
 updateHintKey()
+ 
