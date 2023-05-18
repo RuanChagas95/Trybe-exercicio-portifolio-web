@@ -1,45 +1,68 @@
-html,
-body {
-    margin: 0;
-    padding: 0;
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
 main {
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-}
-#hintKey{
-    font-size: 200%;
-    text-align: center;
-    position: absolute;
-    font-family: sans-serif;
-}
-main h1{
-    font-size: 1000%;
-    text-align: center;
-}
-main footer{
-    display:inline-block;
-    position: absolute;
-    bottom: 0;
-    min-width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
 }
 
-#hint{
-    margin: 0;
-    font-size: 200%;
-    position: relative;
-    right: 65px;
+#hintKey {
+  font-size: 200%;
+  text-align: center;
+  position: absolute;
+  font-family: sans-serif;
 }
 
-@keyframes attention{
-    0% {opacity: 0.2;}
-    100% {opacity: 1;}
+main h1 {
+  font-size: 1000%;
+  text-align: center;
 }
-.attention {
-    animation: attention 1s infinite;
+
+main footer {
+  position: absolute;
+  bottom: 0;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#hint {
+  margin: 0;
+  font-size: 200%;
+  position: relative;
+  right: 65px;
+}
+
+@keyframes attention {
+  0% {
+    opacity: 0.2;
   }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes winner {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.attention {
+  animation: attention 1s infinite;
+}
+
+.winner {
+  animation: attention 0.4s infinite;
+}
