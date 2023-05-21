@@ -6,8 +6,9 @@ word = word.toUpperCase()
 let wordIndex = 0
 const writing = document.querySelector('#writing')
 const hintKey = document.querySelector('#hintKey')
+const hintText = document.querySelector('#hint')
 const audios = {}
-
+let error = false
 function main(event) {
   const key = event.key
   if (writing.classList.contains('winner')){
@@ -17,23 +18,31 @@ function main(event) {
     mainHtml.style.backgroundColor = mainHtml.style.backgroundColor === 'red' ? 'yellow' : 'red'
     if (wordIndex < word.length - 1){
       wordIndex += 1
+      error = false
+      updateHintText()
       updateHintKey()
       updateWriting()
-      hintKey.style.fontSize = '200%'
-      hintKey.classList.remove('attention')
       playAudio('hit')
     } else{
       winner()
             
     }
   } else{
-    upSizeIntruction()
-    hintKey.classList.add('attention')
+    error = true
+    updateHintText()
+    updateHintKey()
   }
     
 }
 function updateHintKey(){
   hintKey.innerText = word[wordIndex]
+  if (error){
+    hintKey.classList.remove('invisible')
+
+    upSizeIntruction()
+  }else{
+    hintKey.classList.add('invisible')
+  }
 }
 function updateWriting(){
   let writingText = ''
@@ -71,12 +80,16 @@ function reset(){
   writing.innerText = ''
   writing.classList.remove('winner')
   wordIndex = 0
-  hintKey.classList.remove('attention')
-  hintKey.classList.remove('winner')
-  hintKey.style.fontSize = '200%'
+  updateHintText()
   updateHintKey()
   updateWriting()
 }
+function updateHintText(){
+  if (error){
+    hintText.classList.remove('invisible')
+  }else{
+    hintText.classList.add('invisible')
+  }
+}
 loadAudios()
 updateHintKey()
- 
