@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +19,26 @@
             <h2 id="hintKey" class="invisible attention"></h2>
         </footer>
     </main>
+    <div class="modal fade" id="requestName" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Iniciando Configuração</h1>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="inputName" class="col-form-label">Insira o Nome da criança(sem acentos):</label>
+                            <input type="text" class="form-control" id="inputName" for="sendButton" name="name">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="sendButton" type="button" class="btn btn-primary">Concluído</button>
+                </div>
+            </div>
+        </div>
+    </div>
       <script src="script.js"></script>
 </body>
 
