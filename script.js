@@ -94,7 +94,7 @@ function loadAudios(){
 }
 function playAudio(audio){
   if (audios[audio]){
-    audios[audio].currentTime = 0        
+    audios[audio].currentTime = 0
     audios[audio].play()
   }
 }
@@ -102,7 +102,6 @@ function winner(){
   playAudio('winner')
   writing.innerText = word
   writing.classList.add('winner')
-  
     
 }
 function reset(){
@@ -120,3 +119,4 @@ function updateHintText(){
     hintText.classList.add('invisible')
   }
 }
+
