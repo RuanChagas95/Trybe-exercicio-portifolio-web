@@ -63,7 +63,7 @@ function updateHintKey() {
   hintKey.innerText = word[wordIndex]
   if (error) {
     hintKey.classList.remove('invisible')
-    upSizeIntruction()
+    fontSizeHint()
   } else {
     hintKey.classList.add('invisible')
   }
@@ -77,8 +77,11 @@ function updateWriting() {
   writing.innerText = writingText
 }
 
-function upSizeIntruction() {
+function fontSizeHint() {
   const fontSize = parseInt(hintKey.style.fontSize)
+  if (!error){
+    hintKey.style.fontSize = '200%'
+  }
   if (fontSize < 250 || isNaN(fontSize)) {
     hintKey.style.fontSize = fontSize ? `${fontSize + 10}%` : '210%'
   }
@@ -104,6 +107,7 @@ function winner() {
 }
 
 function reset() {
+  fontSizeHint()
   writing.innerText = ''
   writing.classList.remove('winner')
   wordIndex = 0
@@ -127,6 +131,7 @@ function hit(){
   updateHintKey()
   updateWriting()
   playAudio('hit')
+  fontSizeHint()
 }
 
 function addRequestNameListeners(){
