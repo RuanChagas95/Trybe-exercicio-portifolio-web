@@ -1,18 +1,48 @@
 const mainHtml = document.querySelector('main')
 const html = document.querySelector('html')
-html.addEventListener('keydown', main)
-let word = prompt('Digite o nome da criança(sem acentos):')
-word = word.toUpperCase()
+let word = ''
 let wordIndex = 0
 const writing = document.querySelector('#writing')
 const hintKey = document.querySelector('#hintKey')
 const hintText = document.querySelector('#hint')
 const audios = {}
 let error = false
+//RequestName Modal
+/* global $ */
+const inputField = document.querySelector('#inputName')
+const sendButton = document.querySelector('#sendButton')
+
+$(function() {
+  abrirModal()
+})
+inputField.addEventListener('keydown', function(event){
+  if (event.key === 'Enter'){
+    event.preventDefault()
+    setWordText()
+  }
+})
+function abrirModal() {
+  $('#requestName').modal('show')
+}
+sendButton.addEventListener('click', setWordText)
+function setWordText() {
+  const inputText = inputField.value
+  word = inputText
+  $('#requestName').modal('hide')
+  init()
+}
+//end requestName Modal
+function init(){
+  loadAudios()
+  updateHintKey()
+  word = word.toUpperCase()
+  writing.classList.add('winner')
+  html.addEventListener('keydown', main)
+}
 function main(event) {
   const key = event.key
   if (writing.classList.contains('winner')){
-    reset()
+    return reset()
   }
   if (key.toUpperCase() === word[wordIndex]) {
     mainHtml.style.backgroundColor = mainHtml.style.backgroundColor === 'red' ? 'yellow' : 'red'
@@ -68,7 +98,6 @@ function playAudio(audio){
     audios[audio].play()
   }
 }
-
 function winner(){
   playAudio('winner')
   writing.innerText = word
@@ -91,5 +120,3 @@ function updateHintText(){
     hintText.classList.add('invisible')
   }
 }
-loadAudios()
-updateHintKey()
