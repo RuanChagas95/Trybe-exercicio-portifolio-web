@@ -11,7 +11,9 @@ let error = false
 /* global $ */
 const inputField = document.querySelector('#inputName')
 const sendButton = document.querySelector('#sendButton')
-
+document.querySelector('#requestName').addEventListener('shown.bs.modal', function () {
+  inputField.focus()
+})
 $(function() {
   abrirModal()
 })
