@@ -1,3 +1,4 @@
+/* global $ */
 const mainHtml = document.querySelector('main')
 const html = document.querySelector('html')
 let word = ''
@@ -9,49 +10,32 @@ const question = document.querySelector('#question')
 const audios = {}
 let error = false
 //RequestName Modal
-/* global $ */
 const inputField = document.querySelector('#inputName')
 const sendButton = document.querySelector('#sendButton')
 const requestName = document.querySelector('#requestName')
 $(function () {
-  showModal()
+  showRequestName()
 })
-function addRequestNameListeners(){
-  sendButton.addEventListener('click', setWordText)
-  requestName.addEventListener('shown.bs.modal', function () {
-    inputField.focus()
-  })
-  requestName.addEventListener('hidden.bs.modal', function () {
-    mainHtml.focus()
-  })
-  requestName.addEventListener('hidePrevented.bs.modal', function () {
-    inputField.placeholder = 'digite um nome antes de iniciarmos'
-  })
-}
-inputField.addEventListener('keydown', function (event) {
-  if (event.key === 'Enter') {
-    event.preventDefault()
-    setWordText()
-  }
-})
-function showModal() {
+function showRequestName() {
   addRequestNameListeners()
   $('#requestName').modal('show')
 }
 
-function setWordText() {
+function setWordText(event) {
   const inputText = inputField.value
   word = inputText
   $('#requestName').modal('hide')
-  init()
+  init(event)
 }
 
 //end requestName Modal
-function init() {
+function init(event) {
   loadAudios()
   updateHintKey()
   word = word.toUpperCase()
-  writing.classList.add('winner')
+  if (!event){
+    writing.classList.add('winner')
+  }
   html.addEventListener('keydown', main)
   question.classList.remove('invisible')
 }
@@ -64,12 +48,7 @@ function main(event) {
   if (key.toUpperCase() === word[wordIndex]) {
     mainHtml.style.backgroundColor = mainHtml.style.backgroundColor === 'red' ? 'yellow' : 'red'
     if (wordIndex < word.length - 1) {
-      wordIndex += 1
-      error = false
-      updateHintText()
-      updateHintKey()
-      updateWriting()
-      playAudio('hit')
+      hit()
     } else {
       winner()
     }
@@ -139,4 +118,32 @@ function updateHintText() {
   } else {
     hintText.classList.add('invisible')
   }
+}
+
+function hit(){
+  wordIndex += 1
+  error = false
+  updateHintText()
+  updateHintKey()
+  updateWriting()
+  playAudio('hit')
+}
+
+function addRequestNameListeners(){
+  sendButton.addEventListener('click', setWordText)
+  requestName.addEventListener('shown.bs.modal', function () {
+    inputField.focus()
+  })
+  requestName.addEventListener('hidden.bs.modal', function () {
+    mainHtml.focus()
+  })
+  requestName.addEventListener('hidePrevented.bs.modal', function () {
+    inputField.placeholder = 'digite um nome antes de iniciarmos'
+  })
+  inputField.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      setWordText()
+    }
+  })
 }
