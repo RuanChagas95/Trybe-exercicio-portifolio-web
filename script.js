@@ -5,28 +5,40 @@ let wordIndex = 0
 const writing = document.querySelector('#writing')
 const hintKey = document.querySelector('#hintKey')
 const hintText = document.querySelector('#hint')
+const question = document.querySelector('#question')
 const audios = {}
 let error = false
 //RequestName Modal
 /* global $ */
 const inputField = document.querySelector('#inputName')
 const sendButton = document.querySelector('#sendButton')
-document.querySelector('#requestName').addEventListener('shown.bs.modal', function () {
-  inputField.focus()
+const requestName = document.querySelector('#requestName')
+$(function () {
+  showModal()
 })
-$(function() {
-  abrirModal()
-})
-inputField.addEventListener('keydown', function(event) {
+function addRequestNameListeners(){
+  sendButton.addEventListener('click', setWordText)
+  requestName.addEventListener('shown.bs.modal', function () {
+    inputField.focus()
+  })
+  requestName.addEventListener('hidden.bs.modal', function () {
+    mainHtml.focus()
+  })
+  requestName.addEventListener('hidePrevented.bs.modal', function () {
+    inputField.placeholder = 'digite um nome antes de iniciarmos'
+  })
+}
+inputField.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
     event.preventDefault()
     setWordText()
   }
 })
-function abrirModal() {
+function showModal() {
+  addRequestNameListeners()
   $('#requestName').modal('show')
 }
-sendButton.addEventListener('click', setWordText)
+
 function setWordText() {
   const inputText = inputField.value
   word = inputText
@@ -41,6 +53,7 @@ function init() {
   word = word.toUpperCase()
   writing.classList.add('winner')
   html.addEventListener('keydown', main)
+  question.classList.remove('invisible')
 }
 
 function main(event) {
