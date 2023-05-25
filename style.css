@@ -66,3 +66,6 @@ main footer {
 .winner {
   animation: attention 0.4s infinite;
 }
+#inputName::placeholder {
+  color: #F5A9A9;
+}
